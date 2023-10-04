@@ -5,7 +5,7 @@ namespace App\Http\Resources\Responses;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(
-    required: ["error"]
+    required: ["message"]
 )]
 class NotFoundResponse
 {
@@ -13,5 +13,5 @@ class NotFoundResponse
         type: "string",
         example: "Not Found"
     )]
-    public string $error;
+    public string $message;
 }

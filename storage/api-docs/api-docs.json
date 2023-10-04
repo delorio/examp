@@ -82,6 +82,16 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundResponse"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -119,6 +129,16 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundResponse"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -142,13 +162,17 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "удалено"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/DeletePostResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundResponse"
                                 }
                             }
                         }
@@ -177,12 +201,28 @@
                 },
                 "type": "object"
             },
-            "NotFoundResponse": {
+            "DeletePostResponse": {
                 "required": [
-                    "error"
+                    "data"
                 ],
                 "properties": {
-                    "error": {
+                    "data": {
+                        "type": "object",
+                        "example": {
+                            "message": [
+                                "удалено"
+                            ]
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "NotFoundResponse": {
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
                         "type": "string",
                         "example": "Not Found"
                     }

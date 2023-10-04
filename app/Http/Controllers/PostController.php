@@ -28,7 +28,8 @@ class PostController extends Controller
                 content: new OA\JsonContent(
                     ref: '#/components/schemas/PostResponse'
                 )
-            )
+            ),
+
         ]
 
 
@@ -61,14 +62,21 @@ class PostController extends Controller
 
                     ref: '#/components/schemas/PostResponse'
                 )
-            )
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Not Found',
+                content: new OA\JsonContent(
+                    ref: '#/components/schemas/NotFoundResponse'
+                )
+            ),
         ]
+
     )]
 
     public function viewPost($postId): JsonResponse
     {
         $post=$this->postService->view($postId);
-//        return response()->json(['data'=>$post]);
         return response()->json(['data'=>[$post]]);
 
     }
@@ -136,7 +144,14 @@ class PostController extends Controller
 
                     ref: '#/components/schemas/PostResponse'
                 )
-            )
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Not Found',
+                content: new OA\JsonContent(
+                    ref: '#/components/schemas/NotFoundResponse'
+                )
+            ),
         ]
     )]
     public function updatePost(int $postId,PostRequest $request): JsonResponse
@@ -169,13 +184,21 @@ class PostController extends Controller
                 response: 200,
                 description: 'ok',
                 content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property: "message", type: "string", example: "удалено"),
-
-                    ]
-//                    ref: '#/components/schemas/DeletePostResponse'
+//                    properties: [
+//                        new OA\Property(property: "message", type: "string", example: "удалено"),
+//
+//                    ]
+                    ref: '#/components/schemas/DeletePostResponse'
                 )
-            )
+
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Not Found',
+                content: new OA\JsonContent(
+                    ref: '#/components/schemas/NotFoundResponse'
+                )
+            ),
         ]
     )]
 
