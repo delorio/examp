@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\DTO\CourseDTO\CourseDTO;
+
 use App\Http\DTO\PostDTO\PostDTO;
 use App\Http\Requests\PostRequest;
 use App\Http\Services\PostServices;
 use OpenApi\Attributes as OA;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PostController extends Controller
 {
@@ -32,7 +33,8 @@ class PostController extends Controller
 
 
     )]
-    public function indexPost(){
+    public function indexPost(): JsonResponse
+    {
         $post=$this->postService->index();
         return response()->json(['data'=>$post],200);
 
@@ -63,7 +65,8 @@ class PostController extends Controller
         ]
     )]
 
-    public function viewPost($postId){
+    public function viewPost($postId): JsonResponse
+    {
         $post=$this->postService->view($postId);
 //        return response()->json(['data'=>$post]);
         return response()->json(['data'=>[$post]]);
@@ -93,7 +96,8 @@ class PostController extends Controller
         ]
     )]
 
-    public function createPost(PostRequest $request){
+    public function createPost(PostRequest $request): JsonResponse
+    {
 
         $postDTO = new PostDTO();
         $postDTO->buildFromArray($request->validated());
@@ -135,7 +139,8 @@ class PostController extends Controller
             )
         ]
     )]
-    public function updatePost(int $postId,PostRequest $request){
+    public function updatePost(int $postId,PostRequest $request): JsonResponse
+    {
 
         $postDTO = new PostDTO();
         $postDTO->buildFromArray($request->validated());
@@ -174,7 +179,8 @@ class PostController extends Controller
         ]
     )]
 
-    public function deletePost(int $postId){
+    public function deletePost(int $postId): JsonResponse
+    {
         $post=$this->postService->delete($postId);
         return response()->json(['data'=>[$post]]);
 

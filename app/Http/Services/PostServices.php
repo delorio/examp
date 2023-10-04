@@ -3,14 +3,15 @@
 namespace App\Http\Services;
 
 use App\Models\Post;
-
+use Illuminate\Database\Eloquent\Collection;
 class PostServices
 {
-    public function index(){
+    public function index(): Collection
+    {
         return Post::all();
     }
 
-    public function view($postId){
+    public function view(int $postId){
         $post =Post::query()->findOrFail($postId);
         return $post;
     }
