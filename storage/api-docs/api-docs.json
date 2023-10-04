@@ -1,0 +1,246 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api",
+        "description": "API endpoint",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/": {},
+        "/api/post": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Get post",
+                "operationId": "870318bf4860aad914e6f239028f8ca3",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Create post",
+                "operationId": "ec545b17aa761c7c9478800107120b1a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostRequestBodies"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/post/{postId}": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Get post",
+                "operationId": "5789b3ebd91e4ab727c03f6e573ab182",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "Get course",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Update post",
+                "operationId": "58519532ff69ed2db7007009c7d5bc61",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "Get post",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PostRequestBodies"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PostResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "Delete post",
+                "operationId": "066a3612c6e31b2276ed1ed714b93c4b",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "Delete post",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "удалено"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PostRequestBodies": {
+                "required": [
+                    "postId",
+                    "name",
+                    "description"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "PHP"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "PHP Courses"
+                    }
+                },
+                "type": "object"
+            },
+            "NotFoundResponse": {
+                "required": [
+                    "error"
+                ],
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "example": "Not Found"
+                    }
+                },
+                "type": "object"
+            },
+            "PostResponse": {
+                "required": [
+                    "data"
+                ],
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PostSchemas"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "PostSchemas": {
+                "required": [
+                    "postId",
+                    "name",
+                    "description"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 16,
+                        "example": "abc"
+                    },
+                    "postId": {
+                        "type": "integer",
+                        "maxLength": 64,
+                        "example": 2
+                    },
+                    "description": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "HELLO"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "requestBodies": {
+            "CourseRequestBody": {
+                "description": "Post request body",
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/PostRequestBodies"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
